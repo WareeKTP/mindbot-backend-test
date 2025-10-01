@@ -8,7 +8,7 @@
 
 ## Deploy project
 ```bash
-docker compose up --build
+$docker compose up --build
 ```
 
 ## Run Test
@@ -40,6 +40,7 @@ $npm run test
   +-----+--------------+--------+
 
 - reservations (example)
+```
   +----+---------+------------+------------+---------------------+---------------------+------------------------+
   | id | room_id | check_in   | check_out  | created_at          | paid_at             | noted                  |
   +----+---------+------------+------------+---------------------+---------------------+------------------------+
@@ -51,13 +52,16 @@ $npm run test
   | 6  | 103     | 2025-10-08 | 2025-10-10 | 2025-10-01 15:33:21 | 2025-10-01 15:35:08 | Anniversary couple     |
   | 7  | 102     | 2025-09-25 | 2025-09-28 | 2025-09-20 08:12:45 | 2025-09-20 08:15:10 | NULL                   |
   +----+---------+------------+------------+---------------------+---------------------+------------------------+
+  ```
 
 
 - ป้องกันการจองซ้ำซ้อนโดยใช้ "rooms.status" ที่ reference ไปยัง table room_status เป็นตัวบอกสถานะห้องแบบ Real-time
+```
   [0] Available                          -> พร้อมให้จองได้ทันที
   [1] Reserved but waiting for payment   -> มีคนจองแต่ยังไม่จ่ายเงิน
   [2] Reserved                           -> จองและชำระเงินเรียบร้อย
   [3] Unavailable                        -> มีผู้เข้าพักในขณะนั้น/ปิดปรับปรุง/ซ่อมแซม
+```
 
 - หลักการสำคัญ: 1 ห้อง = 1 สถานะเท่านั้น นอกจากนี้ยังมีการตรวจสอบข้อมูลใน room_status ด้วยคำสั่ง CHECK (status BETWEEN 0 AND 3)
 
@@ -67,6 +71,7 @@ $npm run test
 
 ### 3. Testing
 - เขียน integration tests ใน tests/ เพื่อทดสอบการทำงานของ API โดยมีการทดสอบดังนี้
+```
 ✔ healthcheck works
 ✔ (Should Success) create reservation
 ✔ (Should Error) empty input
@@ -79,6 +84,7 @@ $npm run test
 ✔ (Should Success) cancel reservation
 ✔ (Should Error) Input Empty
 ✔ (Should Error)cancel non-existent reservation
+```
 
 ### 4. Dockerize
 - สร้าง docker-compose.yml เพื่อรัน API และ PostgreSQL ดังนี้
@@ -135,12 +141,6 @@ services:
 ```
 
 ### 5. Git
-- สร้าง branch และ commit งานอย่างเหมาะสม
-
-### 6. Documentation
-- อธิบายใน `README.md` ว่า
-  - ออกแบบ schema อย่างไร
-  - ป้องกัน double booking แบบไหน
-  - trade-off ที่เลือก
+- สร้าง branch ชื่อว่า candidate_Kiattiphan_Wareerak
 
 ---
