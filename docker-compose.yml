@@ -12,11 +12,15 @@ services:
       - ./migrations:/docker-entrypoint-initdb.d
 
   api:
-    build: ./api
+    image: node:22
+    ports:
+      - '3000:3000'
     volumes:
       - ./api:/usr/src/app
-    ports:
-      - "3000:3000"
+      - ./tests:/usr/src/app/tests
+      - /usr/src/app/node_modules
+    working_dir: /usr/src/app
+    command: sh -c "npm install && npm run start"
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/booking
     depends_on:
