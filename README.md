@@ -144,7 +144,4 @@ services:
 
 ```
 
-### 5. Git
-- สร้าง branch ชื่อว่า candidate_Kiattiphan_Wareerak
-
 ---
